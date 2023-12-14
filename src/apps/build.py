@@ -8,6 +8,7 @@ dirs = [
     'dosattack',
     'evilcompute',
     'faulter',
+    'linecount',
     'filterchain',
     'hashmuxtests',
     'hello',
