@@ -16,13 +16,14 @@ int main(int argc, char **argv) {
     bool last_line_has_newline_char = true;
     char buffer[BUF_SIZE] = {NULL_CHAR};
 
-    while(auto count = file->read(buffer, sizeof(buffer))) {
+    do {
+        auto count = file->read(buffer, sizeof(buffer));
         int i = BUF_SIZE - 1;
         while(i >= 0 && buffer[i] == NULL_CHAR)
             i--;
         int data_size = (i + 1) < BUF_SIZE ? i + 1 : BUF_SIZE;
         if(!data_size)
-            break;
+            continue;
 
         for(int j = 0; j < data_size; j++) {
             if(buffer[j] == NEWLINE_CHAR)
@@ -36,6 +37,7 @@ int main(int argc, char **argv) {
         for(int i = 0; i < BUF_SIZE; i++)
             buffer[i] = NULL_CHAR;
     }
+    while(file->has_data());
     if(!last_line_has_newline_char)
         lines++;
 
